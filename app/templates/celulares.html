@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NOVO</title>
+</head>
+<body>
+<div>
+    <h4>CELULARES</h4>
+    <section class="products-section">
+                <h2>Celulares e Smartphones</h2>
+
+                <div class="products-grid">
+                    {% for celular in celulares %}
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/150" alt="{{ celular.nome }}">
+                            <h4>{{ celular.nome }}</h4>
+                            <p class="price">R$ {{ celular.preco }}</p>
+                        </div>
+                    {% empty %}
+                        <p>Nenhum produto encontrado.</p>
+                    {% endfor %}
+                </div>
+            </section>
+</div>
+</body>
+</html>

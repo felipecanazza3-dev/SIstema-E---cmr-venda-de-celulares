@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Celulares</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Topo Azul */
+        header {
+            background-color: #004687;
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .search-box {
+            display: flex;
+            width: 40%;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+
+        .search-box button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #fff;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .user-actions a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+
+        /* Menu de Categorias */
+        nav {
+            background-color: #fff;
+            padding: 10px 5%;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #004687;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* Carrossel / Lista de Marcas */
+        .brands-grid {
+            display: flex;
+            justify-content: space-between;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .brand-card {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .brand-card img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 10px;
+        }
+
+        /* Layout Principal (Filtros + Produtos) */
+        .main-content {
+            display: flex;
+            gap: 20px;
+        }
+
+        aside {
+            width: 20%;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            height: fit-content;
+        }
+
+        aside h3 {
+            margin-bottom: 15px;
+            font-size: 16px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .products-section {
+            width: 80%;
+        }
+
+        .products-section h2 {
+            margin-bottom: 20px;
+            color: #004687;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #eee;
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .product-card h4 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        .product-card .price {
+            font-size: 18px;
+            color: #004687;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="{% url 'home' %}" class="logo">MATHEUS LOJA</a>
+
+        <form class="search-box" action="{% url 'celulares' %}" method="GET">
+            <input type="text" name="q" placeholder="Faça sua busca">
+            <button type="submit">🔍</button>
+        </form>
+
+        <div class="user-actions">
+            <a href="{% url 'favoritos' %}">Meus Favoritos</a>
+            <a href="#">Minha Conta</a>
+            <a href="#">🛒</a>
+        </div>
+    </header>
+
+    <!-- Menu Principal -->
+    <nav>
+        <a href="{% url 'celulares' %}">Celulares</a>
+        <a href="{% url 'iphone' %}">iPhone</a>
+        <a href="#">Eletrônicos</a>
+        <a href="#">Eletrodomésticos</a>
+    </nav>
+
+    <div class="container">
+        <!-- Ícones das Marcas -->
+        <div class="brands-grid">
+            <a href="{% url 'iphone' %}" class="brand-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/0/747.png" alt="Apple">
+                Apple
+            </a>
+            <a href="{% url 'celulares' %}" class="brand-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/882/882747.png" alt="Xiaomi">
+                Xiaomi
+            </a>
+            <a href="{% url 'celulares' %}" class="brand-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/882/882726.png" alt="Motorola">
+                Motorola
+            </a>
+            <a href="{% url 'celulares' %}" class="brand-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/5969/5969116.png" alt="Samsung">
+                Samsung
+            </a>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <!-- Sidebar de Filtros -->
+            <aside>
+                <h3>FILTROS</h3>
+                <p><strong>Categoria</strong></p>
+                <br>
+                <p><strong>Preço</strong></p>
+            </aside>
+
+            <!-- Lista de Produtos -->
+            <section class="products-section">
+                <h2>Celulares e Smartphones</h2>
+
+                <div class="products-grid">
+                    {% for celular in celulares %}
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/150" alt="{{ celular.nome }}">
+                            <h4>{{ celular.nome }}</h4>
+                            <p class="price">R$ {{ celular.preco }}</p>
+                        </div>
+                    {% empty %}
+                        <p>Nenhum produto encontrado.</p>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </div>
+
+</body>
+</html>

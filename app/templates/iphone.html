@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pesquisa de iPhones</title>
+</head>
+<body>
+    <h1>Procurar iPhones</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Listar iPhones</button>
+    </form>
+
+    <hr>
+
+    {% if filtro %}
+        <h2>Resultados da Pesquisa:</h2>
+        <ul>
+            {% for celular in filtro %}
+                <li><strong>{{ celular.nome }}</strong> - {{ celular.modelo }} ({{ celular.marca }}) - {{ celular.descricao }}</li>
+            {% empty %}
+                <li>Nenhum iPhone encontrado.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div>
+        <a href="{% url 'home' %}"> home</a>
+    </div>
+</body>
+</html>
